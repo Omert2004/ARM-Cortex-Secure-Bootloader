@@ -54,7 +54,7 @@ Flash_Status_t Flash_Interface_Erase(uint32_t startAddress, uint32_t length) {
 }
 
 Flash_Status_t Flash_Interface_Write(uint32_t address, const uint8_t *data, uint32_t length) {
-	if (Flash_If_Unlock() != FLASH_OK) return FLASH_ERR_LOCKED;
+	if (Flash_Interface_Unlock() != FLASH_OK) return FLASH_ERR_LOCKED;
 
 	for (uint32_t i = 0; i < length; i++) {
 	 // Not: LL kullanırsak burayı da değiştireceğiz
