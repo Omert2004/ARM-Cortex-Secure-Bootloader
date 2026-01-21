@@ -1,0 +1,15 @@
+Core/Src/Cyptology_Control.o: ../Core/Src/Cyptology_Control.c \
+ ../Core/Inc/Cryptology_Control.h ../Core/Inc/firmware_footer.h \
+ C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/CS350_Project/BOOTLOADER1/Libs/tinycrypt/Inc/sha256.h \
+ C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/CS350_Project/BOOTLOADER1/Libs/tinycrypt/Inc/ecc_dsa.h \
+ C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/CS350_Project/BOOTLOADER1/Libs/tinycrypt/Inc/ecc.h \
+ ../Core/Inc/firmware_footer.h ../Core/Inc/mem_layout.h \
+ ../Core/Inc/keys.h
+../Core/Inc/Cryptology_Control.h:
+../Core/Inc/firmware_footer.h:
+C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/CS350_Project/BOOTLOADER1/Libs/tinycrypt/Inc/sha256.h:
+C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/CS350_Project/BOOTLOADER1/Libs/tinycrypt/Inc/ecc_dsa.h:
+C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/CS350_Project/BOOTLOADER1/Libs/tinycrypt/Inc/ecc.h:
+../Core/Inc/firmware_footer.h:
+../Core/Inc/mem_layout.h:
+../Core/Inc/keys.h:
