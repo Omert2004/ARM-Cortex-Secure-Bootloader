@@ -37,7 +37,7 @@ C_DEPS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 Libs/tinycrypt/Src/%.o Libs/tinycrypt/Src/%.su Libs/tinycrypt/Src/%.cyclo: ../Libs/tinycrypt/Src/%.c Libs/tinycrypt/Src/subdir.mk
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I"C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/CS350_Project/BOOTLOADER1/Libs/lz4/Inc" -I../Core/Inc -I"C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/CS350_Project/BOOTLOADER1/Libs/tinycrypt/Inc" -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I"C:/Users/Oguzm/OneDrive - ozyegin.edu.tr/Desktop/Github_Projects/ARM-Cortex-Secure-Bootloader/BOOTLOADER1/Libs/lz4/Inc" -I../Core/Inc -I"C:/Users/Oguzm/OneDrive - ozyegin.edu.tr/Desktop/Github_Projects/ARM-Cortex-Secure-Bootloader/BOOTLOADER1/Libs/tinycrypt/Inc" -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 
 clean: clean-Libs-2f-tinycrypt-2f-Src
 

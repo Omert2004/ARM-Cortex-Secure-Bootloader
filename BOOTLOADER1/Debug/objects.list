@@ -1,5 +1,6 @@
 "./Core/Src/BL_Functions.o"
 "./Core/Src/Cyptology_Control.o"
+"./Core/Src/flash_driver_stm32f7.o"
 "./Core/Src/jump_to_app.o"
 "./Core/Src/keys.o"
 "./Core/Src/main.o"

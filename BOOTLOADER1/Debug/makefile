@@ -66,8 +66,8 @@ all:
 main-build: BOOTLOADER1.elf secondary-outputs
 
 # Tool invocations
-BOOTLOADER1.elf BOOTLOADER1.map: $(OBJS) $(USER_OBJS) C:\Users\mertk\STM32CubeIDE\workspace_1.18.0\CS350_Project\BOOTLOADER1\STM32F746NGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "BOOTLOADER1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\mertk\STM32CubeIDE\workspace_1.18.0\CS350_Project\BOOTLOADER1\STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BOOTLOADER1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+BOOTLOADER1.elf BOOTLOADER1.map: $(OBJS) $(USER_OBJS) C:\Users\Oguzm\OneDrive\ -\ ozyegin.edu.tr\Desktop\Github_Projects\ARM-Cortex-Secure-Bootloader\BOOTLOADER1\STM32F746NGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "BOOTLOADER1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\Oguzm\OneDrive - ozyegin.edu.tr\Desktop\Github_Projects\ARM-Cortex-Secure-Bootloader\BOOTLOADER1\STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BOOTLOADER1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

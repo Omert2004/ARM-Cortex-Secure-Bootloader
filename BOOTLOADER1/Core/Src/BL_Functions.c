@@ -169,7 +169,7 @@ static uint8_t BL_Encrypt_Backup(uint32_t src_addr, uint32_t dest_addr) {
              return 0;
         }
 
-        if (Flash_If_Write(dest_addr + offset, buffer_enc, 16) != FLASH_OK) {
+        if (Flash_Interface_Write(dest_addr + offset, buffer_enc, 16) != FLASH_OK) {
             __enable_irq();
             printf("Backup Write Failed at offset 0x%x\r\n", (unsigned int)offset);
             return 0;
