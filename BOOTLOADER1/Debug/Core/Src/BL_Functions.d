@@ -28,10 +28,10 @@ Core/Src/BL_Functions.o: ../Core/Src/BL_Functions.c \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
- C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/CS350_Project/BOOTLOADER1/Libs/tinycrypt/Inc/aes.h \
+ C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/ARM-Cortex-Secure-Bootloader/BOOTLOADER1/Libs/tinycrypt/Inc/aes.h \
  ../Core/Inc/keys.h ../Core/Inc/mem_layout.h ../Core/Inc/tiny_printf.h \
  ../Core/Inc/Cryptology_Control.h ../Core/Inc/firmware_footer.h \
- ../Core/Inc/firmware_footer.h
+ ../Core/Inc/firmware_footer.h ../Core/Inc/flash_interface.h
 ../Core/Inc/BL_Functions.h:
 ../Core/Inc/bootloader_interface.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
@@ -62,10 +62,11 @@ Core/Src/BL_Functions.o: ../Core/Src/BL_Functions.c \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
-C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/CS350_Project/BOOTLOADER1/Libs/tinycrypt/Inc/aes.h:
+C:/Users/mertk/STM32CubeIDE/workspace_1.18.0/ARM-Cortex-Secure-Bootloader/BOOTLOADER1/Libs/tinycrypt/Inc/aes.h:
 ../Core/Inc/keys.h:
 ../Core/Inc/mem_layout.h:
 ../Core/Inc/tiny_printf.h:
 ../Core/Inc/Cryptology_Control.h:
 ../Core/Inc/firmware_footer.h:
 ../Core/Inc/firmware_footer.h:
+../Core/Inc/flash_interface.h:

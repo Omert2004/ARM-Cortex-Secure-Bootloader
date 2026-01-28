@@ -9,6 +9,8 @@
 "./Core/Src/sysmem.o"
 "./Core/Src/system_stm32f7xx.o"
 "./Core/Src/tiny_printf.o"
+"./Core/Src/Drivers/flash_driver_stm32f7.o"
+"./Core/Src/Drivers/system_driver_stm32f7.o"
 "./Core/Startup/startup_stm32f746nghx.o"
 "./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.o"
 "./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.o"

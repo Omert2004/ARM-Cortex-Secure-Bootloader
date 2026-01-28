@@ -1,8 +1,9 @@
+../Drivers/CMSIS/Include/core_cm7.h:2147:34:__NVIC_SystemReset	1
 ../Core/Src/BL_Functions.c:31:9:BL_ReadConfig	2
-../Core/Src/BL_Functions.c:49:9:BL_WriteConfig	4
-../Core/Src/BL_Functions.c:86:16:BL_Raw_Copy	6
-../Core/Src/BL_Functions.c:131:16:BL_Decrypt_Update_Image	7
-../Core/Src/BL_Functions.c:178:16:BL_Encrypt_Backup	7
-../Core/Src/BL_Functions.c:235:16:BL_Decrypt_Backup_Image	7
-../Core/Src/BL_Functions.c:287:6:BL_Swap_NoBuffer	8
-../Core/Src/BL_Functions.c:361:9:BL_Rollback	5
+../Core/Src/BL_Functions.c:50:9:BL_WriteConfig	3
+../Core/Src/BL_Functions.c:74:16:BL_Raw_Copy	3
+../Core/Src/BL_Functions.c:104:16:BL_Decrypt_Update_Image	6
+../Core/Src/BL_Functions.c:144:16:BL_Encrypt_Backup	6
+../Core/Src/BL_Functions.c:192:16:BL_Decrypt_Backup_Image	6
+../Core/Src/BL_Functions.c:235:6:BL_Swap_NoBuffer	7
+../Core/Src/BL_Functions.c:301:9:BL_Rollback	4
