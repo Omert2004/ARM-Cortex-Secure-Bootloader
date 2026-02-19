@@ -7,7 +7,7 @@
 
 
 #include "tiny_printf.h"
-#include "stm32f7xx_hal.h" // Change this if using a different series
+#include "stm32f7xx_hal.h"
 
 static UART_HandleTypeDef *g_uart_handle = NULL;
 

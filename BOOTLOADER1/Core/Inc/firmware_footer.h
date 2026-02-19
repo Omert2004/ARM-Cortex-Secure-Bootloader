@@ -8,17 +8,14 @@
 #ifndef INC_FIRMWARE_FOOTER_H_
 #define INC_FIRMWARE_FOOTER_H_
 
-#ifndef FW_FOOTER_H
-#define FW_FOOTER_H
-
 #include <stdint.h>
 
-/* This Magic Number helps the bootloader scan backwards to find the data */
-#define FOOTER_MAGIC 0x454E4421  // ASCII "END!"
+/* Magic marker — bootloader scans backwards to find this */
+#define FOOTER_MAGIC 0x454E4421  /* ASCII "END!" */
 
-// stattes
+/* Firmware validation status codes */
 typedef enum {
-    BL_OK = 0,			//success
+    BL_OK = 0,
     BL_ERR_FOOTER_NOT_FOUND,
     BL_ERR_FOOTER_BAD,
     BL_ERR_IMAGE_SIZE_BAD,
@@ -28,14 +25,12 @@ typedef enum {
     BL_ERR_SIG_FAIL,
 } FW_Status_t;
 
-/* 2. Footer Structure (The missing part causing errors) */
+/* Footer appended after the encrypted firmware payload */
 typedef struct {
-    uint32_t version;      // Firmware Version
-    uint32_t size;         // Payload Size (IV + Encrypted Data)
-    uint8_t  signature[64];// ECDSA Signature (r + s)
-    uint32_t magic;        // Magic Number (FOOTER_MAGIC)
+    uint32_t version;       /* Firmware Version                      */
+    uint32_t size;          /* Payload Size (IV + Encrypted Data)    */
+    uint8_t  signature[64]; /* ECDSA Signature (r + s, 32 bytes each)*/
+    uint32_t magic;         /* FOOTER_MAGIC                          */
 } fw_footer_t;
 
-
-#endif
 #endif /* INC_FIRMWARE_FOOTER_H_ */

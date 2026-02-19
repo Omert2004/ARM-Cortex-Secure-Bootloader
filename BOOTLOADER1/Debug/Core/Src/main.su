@@ -1,4 +1,0 @@
-../Core/Src/main.c:81:5:main	24	static
-../Core/Src/main.c:230:6:Test_MPU_Violation	16	static
-../Core/Src/main.c:257:6:Test_Config_Write	48	static
-../Core/Src/main.c:303:6:BL_Test_Crypto	376	static

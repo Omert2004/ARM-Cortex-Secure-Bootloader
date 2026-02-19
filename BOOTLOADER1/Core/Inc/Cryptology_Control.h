@@ -5,15 +5,14 @@
  *      Author: Oguzm
  */
 
-
-
 #ifndef INC_CRYPTOLOGY_CONTROL_H_
 #define INC_CRYPTOLOGY_CONTROL_H_
 
 #include <stdint.h>
 #include "firmware_footer.h"
+#include "system_interface.h"
 
 uint32_t Find_Footer_Address(uint32_t slot_start, uint32_t slot_size);
-FW_Status_t Firmware_Is_Valid(uint32_t start_addr, uint32_t size);
+FW_Status_t Firmware_Is_Valid(uint32_t start_addr, uint32_t size, const BL_CryptoOps_t *crypto);
 
 #endif /* INC_CRYPTOLOGY_CONTROL_H_ */
