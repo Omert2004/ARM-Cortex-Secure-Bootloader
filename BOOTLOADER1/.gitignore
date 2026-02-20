@@ -1,3 +1,11 @@
 build
 mx.scratch
 !.settings
+
+# --- Cryptographic keys (NEVER commit these) ---
+Key/private.pem
+Key/secret.key
+
+# --- Generated firmware artifacts ---
+Key/update_encrypted.bin
+Key/*.bin
