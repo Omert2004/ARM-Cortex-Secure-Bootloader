@@ -265,3 +265,25 @@ Power On → Read Config
 | `Core/Src/Drivers/crypto_driver_sw.c` | Driver | TinyCrypt wrappers |
 
 ---
+
+---
+
+## Authors
+
+- **Oğuz Mert Coşkun**  
+  🔗 GitHub: https://github.com/Omert2004
+
+- **Mert Kırgın**  
+  🔗 GitHub: https://github.com/mertkirgin
+
+**Electrical & Electronics Engineering**  
+**Özyeğin University**
+
+---
+
+## Keywords
+
+`ARM Cortex-x` `Secure Boot` `Bootloader` `Embedded Security`  
+`ECDSA` `SHA-256` `AES-128` `MPU`  
+`Firmware Update` `Dual Slot` `Root of Trust`
+
