@@ -9,15 +9,15 @@ a single platform driver file.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    PORTABLE LAYER                        │
+│                    PORTABLE LAYER                       │
 │   bootloader_core.c  →  BL_Functions.c                  │
-│                      →  Cryptology_Control.c             │
-│                                                          │
-│   All hardware access via:  sys->mem.*                   │
-│                             sys->crypto.*                │
-│                             sys->Flash_*() / JumpToApp() │
+│                      →  Cryptology_Control.c            │
+│                                                         │
+│   All hardware access via:  sys->mem.*                  │
+│                             sys->crypto.*               │
+│                             sys->Flash_*() / JumpToApp()│
 ├─────────────────────────────────────────────────────────┤
-│                   system_interface.h                     │
+│                   system_interface.h                    │
 │     BL_MemoryMap_t  +  BL_CryptoOps_t  +  fn pointers   │
 ├────────────────────────┬────────────────────────────────┤
 │  system_driver_<mcu>.c │  crypto_driver_sw.c            │
@@ -45,8 +45,54 @@ Edit `Core/Inc/mem_layout.h` with your MCU's flash addresses:
 - The bootloader itself must fit below `CONFIG_SECTOR_ADDR`.
 
 ---
+## Step 2 — Linker Scripts & Vector Table
 
-## Step 2 — Platform Driver
+For the bootloader to successfully hand off control to the Main Application, both the Bootloader and the Application must be compiled with strict memory boundaries that match `mem_layout.h`.
+
+### 1. The Bootloader Linker Script
+The bootloader must be restricted so it does not accidentally overwrite the Config Sector or the Application slots. 
+
+In your bootloader's `.ld` file (e.g., `STM32F746XX_FLASH.ld`), limit the `FLASH` length to fit exactly below `CONFIG_SECTOR_ADDR`:
+```ld
+/* Example: Bootloader gets the first 64KB */
+MEMORY
+{
+  RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 320K
+  FLASH (rx)     : ORIGIN = 0x08000000, LENGTH = 64K 
+}
+```
+
+### 2. The Application Linker Script
+The Main Application **must not** be linked to the default `0x08000000` address. It must be shifted to match `APP_ACTIVE_START_ADDR` (Slot 5).
+
+In your **Application's** `.ld` file, update the `ORIGIN` and reduce the `LENGTH` so it fits perfectly inside the slot size defined in `mem_layout.h`:
+```ld
+/* Example: Application starts at Slot 5 and is restricted to SLOT_SIZE */
+MEMORY
+{
+  RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 320K
+  FLASH (rx)     : ORIGIN = 0x08040000, LENGTH = 256K /* 0x40000 */
+}
+```
+
+### 3. Application Vector Table Offset (VTOR)
+When the bootloader jumps to the application, the ARM Cortex core needs to know where the application's interrupt handlers are located. 
+
+In your **Application's** initialization code (typically `system_<mcu>.c`), you must enable the vector table relocation and set the offset to match your `APP_ACTIVE_START_ADDR`.
+
+**For STM32 (in `system_stm32fxxx.c`):**
+```c
+/* 1. Uncomment to enable vector table relocation */
+#define USER_VECT_TAB_ADDRESS
+
+#if defined(USER_VECT_TAB_ADDRESS)
+/* 2. Set the offset to match your APP_ACTIVE_START_ADDR offset from base flash */
+/* Example: 0x08040000 - 0x08000000 = 0x00040000 */
+#define VECT_TAB_OFFSET  0x00040000U 
+#endif
+```
+---
+## Step 3 — Platform Driver
 
 Copy `Core/Src/Drivers/system_driver_template.c`, rename it to
 `system_driver_<mcu>.c`, and fill in every `TODO`.
@@ -84,7 +130,7 @@ const Bootloader_Interface_t* Sys_GetInterface(void) { return &mcu_interface; }
 
 ---
 
-## Step 3 — Hardware Crypto (optional)
+## Step 4 — Hardware Crypto (optional)
 
 By default all crypto runs in software via `crypto_driver_sw.c` (TinyCrypt).
 If your MCU has AES/SHA/ECC hardware, replace individual entries in `.crypto`:
@@ -103,7 +149,7 @@ Each function must follow the same signature as its `SW_` counterpart in
 
 ---
 
-## Step 4 — Key Toolchain (`Key/` folder)
+## Step 5 — Key Toolchain (`Key/` folder)
 
 ```
 Key/
@@ -150,15 +196,11 @@ add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
     COMMAND python ${KEY_DIR}/generate_update.py
             ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin
     WORKING_DIRECTORY ${KEY_DIR}
-    COMMENT "Generating encrypted update package..."
 )
 ```
-
-> `private.pem` and `secret.key` must be in `Key/` at build time. Never commit them.
-
 ---
 
-## Step 5 — Wire into `main()`
+## Step 5 — Wiring into `main()`
 
 In your `main.c`, call `Bootloader_Run` with the platform interface after
 hardware init and before anything else:
@@ -178,28 +220,6 @@ int main(void) {
     /* Never reached — bootloader either jumps to app or halts */
 }
 ```
-
-`Bootloader_Run` never returns. It either jumps to the application or calls
-`ErrorHandler` if no valid image is found.
-
----
-
-## Step 6 — CMake
-
-Swap the STM32F7 driver for yours:
-
-```cmake
-target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-    Core/Src/Drivers/system_driver_<mcu>.c   # replace this line
-    Core/Src/Drivers/crypto_driver_sw.c
-    Core/Src/bootloader_core.c
-    Core/Src/BL_Functions.c
-    Core/Src/Cryptology_Control.c
-    Core/Src/keys.c
-    Core/Src/tiny_printf.c
-)
-```
-
 ---
 
 ## Firmware Image Format
@@ -241,16 +261,7 @@ Power On → Read Config
 | `Core/Src/Cryptology_Control.c` | Portable | Footer scan, SHA-256, ECDSA |
 | `Core/Src/keys.c` | **Replace per project** | AES + ECDSA public keys |
 | `Core/Src/Drivers/system_driver_template.c` | Platform | **Start here** — empty driver template |
-| `Core/Src/Drivers/system_driver_stm32f7.c` | Platform | STM32F746 reference implementation |
+| `Core/Src/Drivers/system_driver_stm32f7.c` | Platform | STM32F746 HAL reference implementation |
 | `Core/Src/Drivers/crypto_driver_sw.c` | Driver | TinyCrypt wrappers |
 
 ---
-
-## Pre-Deployment Checklist
-
-- [ ] New keys generated (`keygen.py`) and embedded in `keys.c`
-- [ ] `mem_layout.h` addresses match your MCU's flash layout
-- [ ] All `TODO` sections in your platform driver are implemented
-- [ ] `JumpToApp` disables all IRQs and sets `SCB->VTOR`
-- [ ] Tested: boot → update → rollback
-- [ ] `private.pem` and `secret.key` are not in version control
